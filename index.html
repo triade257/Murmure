@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Murmure</title>
+<meta name="description" content="Confessions anonymes, espace sûr et bienveillant" />
+<meta name="theme-color" content="#1B2A4A" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <h1 class="logo">Murmure</h1>
+    <p class="tagline">confessions anonymes &middot; espace sûr &amp; bienveillant</p>
+
+    <div class="tabs" role="tablist">
+      <button class="tab tab--active" data-tab="pour-toi" role="tab" aria-selected="true">Pour toi</button>
+      <button class="tab" data-tab="suivis" role="tab" aria-selected="false">Suivis</button>
+    </div>
+  </header>
+
+  <main id="feed" class="feed" aria-live="polite">
+    <!-- Les publications sont injectées ici par app.js -->
+  </main>
+
+  <template id="post-template">
+    <article class="post">
+      <div class="post-header">
+        <div class="post-avatar" aria-hidden="true"></div>
+        <div class="post-meta">
+          <span class="post-author"></span>
+          <span class="post-time"></span>
+        </div>
+      </div>
+      <h2 class="post-title"></h2>
+      <p class="post-body"></p>
+      <div class="post-actions">
+        <button class="like-btn" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" class="heart-icon" aria-hidden="true">
+            <path d="M12 21s-7.5-4.7-10-9.3C.6 8.4 2 4.8 5.4 4.1c2-.4 4 .5 5.1 2.2C11.6 4.6 13.6 3.7 15.6 4.1c3.4.7 4.8 4.3 3.4 7.6C19.5 16.3 12 21 12 21z"/>
+          </svg>
+          <span class="like-count"></span>
+        </button>
+        <div class="post-actions-right">
+          <button class="icon-btn share-btn" type="button" aria-label="Partager">
+            <svg viewBox="0 0 24 24"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v14"/></svg>
+          </button>
+          <button class="icon-btn report-btn" type="button" aria-label="Signaler">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <button class="fab" id="composeBtn" type="button" aria-label="Écrire une publication">
+    <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 013 3L12 15l-4 1 1-4z"/></svg>
+  </button>
+
+  <nav class="bottom-nav">
+    <button class="nav-item nav-item--active" data-nav="accueil">
+      <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+      <span>Accueil</span>
+    </button>
+    <button class="nav-item" data-nav="tendances">
+      <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>
+      <span>Tendances</span>
+    </button>
+    <button class="nav-item" data-nav="ecrire">
+      <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>
+      <span>Écrire</span>
+    </button>
+    <button class="nav-item" data-nav="notifications">
+      <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0"/></svg>
+      <span>Notifications</span>
+    </button>
+    <button class="nav-item" data-nav="profil">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+      <span>Profil</span>
+    </button>
+  </nav>
+
+  <div class="modal-backdrop" id="composeModal">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <h2>Écrire</h2>
+      <input type="text" id="composeTitle" placeholder="Un titre (facultatif), ex. (Ce qui m'a plu aujourd'hui)" maxlength="80" />
+      <textarea id="composeBody" placeholder="Raconte ce que tu veux..." maxlength="500" rows="5"></textarea>
+      <label class="anon-toggle">
+        <input type="checkbox" id="composeAnon" checked />
+        <span>Publier anonymement</span>
+      </label>
+      <div class="modal-buttons">
+        <button class="btn-secondary" id="cancelCompose" type="button">Annuler</button>
+        <button class="btn-primary" id="publishCompose" type="button">Publier</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
